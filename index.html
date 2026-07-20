@@ -5,17 +5,15 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Muhammad Rehan | 3D Portfolio</title>
 
- <!-- Google tag (gtag.js) -->
+<!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-25EVGVLFFL"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
-
   gtag('config', 'G-25EVGVLFFL');
 </script>
 
- 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap" rel="stylesheet">
@@ -39,6 +37,50 @@
     color: var(--text);
     overflow-x: hidden;
     line-height: 1.6;
+    position: relative;
+  }
+  
+  /* ========== 1. ANIMATED GRADIENT BACKGROUND ========== */
+  .animated-bg {
+    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    background: linear-gradient(-45deg, #0a0a15, #1a1040, #0a2035, #150a25, #0a0a15);
+    background-size: 400% 400%;
+    animation: gradientShift 15s ease infinite;
+    z-index: -2;
+  }
+  @keyframes gradientShift {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+  }
+  
+  /* ========== 2. FLOATING PARTICLES ========== */
+  .particles {
+    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    pointer-events: none; z-index: -1; overflow: hidden;
+  }
+  .particle {
+    position: absolute; width: 4px; height: 4px;
+    background: var(--accent); border-radius: 50%;
+    opacity: 0.6; animation: floatParticle linear infinite;
+    box-shadow: 0 0 10px var(--accent);
+  }
+  .particle:nth-child(even) { background: var(--accent-2); box-shadow: 0 0 10px var(--accent-2); }
+  .particle:nth-child(3n) { background: #ff5ccd; box-shadow: 0 0 10px #ff5ccd; }
+  @keyframes floatParticle {
+    0% { transform: translateY(100vh) translateX(0); opacity: 0; }
+    10% { opacity: 0.6; }
+    90% { opacity: 0.6; }
+    100% { transform: translateY(-10vh) translateX(100px); opacity: 0; }
+  }
+  
+  /* ========== 3. MOUSE GLOW ========== */
+  .mouse-glow {
+    position: fixed; width: 400px; height: 400px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(124,92,255,0.15) 0%, rgba(0,224,255,0.08) 40%, transparent 70%);
+    pointer-events: none; transform: translate(-50%, -50%);
+    z-index: 0; transition: opacity 0.3s; mix-blend-mode: screen;
   }
   
   /* ---------- NAVIGATION ---------- */
@@ -54,7 +96,8 @@
   .logo {
     font-size: 1.3rem; font-weight: 700;
     background: linear-gradient(90deg, var(--accent), var(--accent-2));
-    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    background-clip: text; -webkit-background-clip: text;
+    color: transparent; -webkit-text-fill-color: transparent;
   }
   nav ul { display: flex; gap: 2rem; list-style: none; }
   nav a {
@@ -78,6 +121,7 @@
     perspective: 1200px;
     position: relative;
     gap: 3rem;
+    z-index: 1;
   }
   .hero-text { max-width: 600px; z-index: 2; }
   .hero-text .greeting {
@@ -88,15 +132,23 @@
     font-size: clamp(2.5rem, 6vw, 4.5rem);
     line-height: 1.1; margin-bottom: 1rem; font-weight: 800;
     background: linear-gradient(135deg, #fff 30%, var(--accent) 70%, var(--accent-2));
-    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    background-clip: text; -webkit-background-clip: text;
+    color: transparent; -webkit-text-fill-color: transparent;
   }
-  .hero-text .role {
+  
+  /* ========== 4. TYPING ANIMATION ========== */
+  .typing-container {
     font-size: 1.3rem; color: var(--muted); margin-bottom: 1.5rem;
-    font-weight: 400;
+    font-weight: 400; min-height: 2rem;
   }
-  .hero-text .role span {
-    color: var(--accent-2); font-weight: 600;
+  .typing-text { color: var(--accent-2); font-weight: 600; }
+  .cursor {
+    display: inline-block; width: 3px; height: 1.3rem;
+    background: var(--accent-2); margin-left: 2px;
+    animation: blink 0.8s infinite; vertical-align: middle;
   }
+  @keyframes blink { 0%, 50% { opacity: 1; } 51%, 100% { opacity: 0; } }
+  
   .hero-text p { color: var(--muted); font-size: 1rem; margin-bottom: 2rem; }
   .btn {
     display: inline-block; padding: 0.9rem 2rem;
@@ -108,10 +160,8 @@
   }
   .btn:hover { transform: translateY(-3px); box-shadow: 0 12px 32px rgba(124, 92, 255, 0.55); }
   .btn-outline {
-    background: transparent;
-    border: 2px solid var(--accent);
-    box-shadow: none;
-    margin-left: 0.8rem;
+    background: transparent; border: 2px solid var(--accent);
+    box-shadow: none; margin-left: 0.8rem;
   }
   .btn-outline:hover {
     background: rgba(124, 92, 255, 0.15);
@@ -145,7 +195,7 @@
     50% { transform: translateY(-20px); }
   }
   
-  /* ---------- 3D ROTATING CARD STACK (SMALLER) ---------- */
+  /* ---------- 3D ROTATING CARD STACK ---------- */
   .scene-stack {
     position: absolute;
     top: -20px; right: -20px;
@@ -170,8 +220,6 @@
     box-shadow: 0 8px 20px rgba(0,0,0,0.3);
     transition: all 0.4s ease;
   }
-  
-  /* Three cards positioned in 3D space - always rotating */
   .card-1 {
     transform: rotateY(0deg) translateZ(65px);
     background: linear-gradient(135deg, rgba(124,92,255,0.5), rgba(0,224,255,0.3));
@@ -184,33 +232,49 @@
     transform: rotateY(240deg) translateZ(65px);
     background: linear-gradient(135deg, rgba(255,92,205,0.5), rgba(124,92,255,0.3));
   }
-  
-  /* Continuous rotation animation */
   @keyframes rotateStack {
     0% { transform: rotateY(0deg) rotateX(10deg); }
     100% { transform: rotateY(360deg) rotateX(10deg); }
   }
-  
-  /* Hover: speed up rotation and expand cards */
-  .scene-stack:hover .card-stack-wrapper {
-    animation-duration: 8s;
-  }
+  .scene-stack:hover .card-stack-wrapper { animation-duration: 8s; }
   .scene-stack:hover .card-1 { transform: rotateY(0deg) translateZ(90px); }
   .scene-stack:hover .card-2 { transform: rotateY(120deg) translateZ(90px); }
   .scene-stack:hover .card-3 { transform: rotateY(240deg) translateZ(90px); }
   
   /* ---------- SECTIONS ---------- */
-  section { padding: 6rem 8vw; position: relative; }
+  section { padding: 6rem 8vw; position: relative; z-index: 1; }
   .section-title {
     font-size: 2.5rem; margin-bottom: 0.5rem; text-align: center;
     background: linear-gradient(90deg, var(--accent), var(--accent-2));
-    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    background-clip: text; -webkit-background-clip: text; -webkit-text-fill-color: transparent;
     font-weight: 700;
   }
   .section-subtitle {
     text-align: center; color: var(--muted);
     margin-bottom: 3rem; font-size: 1rem;
   }
+  
+  /* ========== 8. COUNTER ANIMATION (STATS) ========== */
+  .stats {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 2rem; max-width: 900px; margin: 3rem auto 0;
+  }
+  .stat-item {
+    text-align: center; padding: 2rem 1rem;
+    background: rgba(18, 18, 42, 0.5); border: 1px solid rgba(124, 92, 255, 0.2);
+    border-radius: 16px; backdrop-filter: blur(10px);
+    transition: transform 0.3s, box-shadow 0.3s;
+  }
+  .stat-item:hover {
+    transform: translateY(-8px); box-shadow: 0 15px 30px rgba(124, 92, 255, 0.3); border-color: var(--accent-2);
+  }
+  .stat-number {
+    font-size: 3rem; font-weight: 800;
+    background: linear-gradient(135deg, var(--accent), var(--accent-2));
+    background-clip: text; -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    display: block; margin-bottom: 0.5rem;
+  }
+  .stat-label { color: var(--muted); font-size: 0.95rem; font-weight: 500; }
   
   /* ---------- ABOUT ---------- */
   .about-content {
@@ -255,7 +319,7 @@
   }
   .skill:hover::before { opacity: 1; }
   
-  /* ---------- PROJECTS (3D CARDS) ---------- */
+  /* ---------- PROJECTS ---------- */
   .projects-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
@@ -287,7 +351,9 @@
     object-fit: cover;
     transition: transform 0.5s;
   }
-  .card:hover .card-img img { transform: scale(1.08); }
+  /* ========== 6. PROJECT HOVER ZOOM (Enhanced) ========== */
+  .card:hover .card-img img { transform: scale(1.15); }
+  
   .card-img .placeholder {
     width: 100%; height: 100%;
     display: flex; align-items: center; justify-content: center;
@@ -295,14 +361,8 @@
     background: linear-gradient(135deg, rgba(124,92,255,0.2), rgba(0,224,255,0.2));
   }
   .card-body { padding: 1.8rem; transform: translateZ(30px); }
-  .card h3 {
-    font-size: 1.4rem; margin-bottom: 0.8rem;
-    color: var(--text);
-  }
-  .card p {
-    color: var(--muted); font-size: 0.95rem;
-    margin-bottom: 1.2rem;
-  }
+  .card h3 { font-size: 1.4rem; margin-bottom: 0.8rem; color: var(--text); }
+  .card p { color: var(--muted); font-size: 0.95rem; margin-bottom: 1.2rem; }
   .card-tag {
     display: inline-block; margin-right: 0.5rem; margin-bottom: 0.5rem;
     padding: 0.3rem 0.8rem;
@@ -310,13 +370,8 @@
     border: 1px solid rgba(124, 92, 255, 0.4);
     border-radius: 20px; font-size: 0.75rem; color: var(--accent-2);
   }
-  .card-actions {
-    display: flex; gap: 0.8rem; margin-top: 1.5rem;
-    flex-wrap: wrap;
-  }
-  .card-actions .btn {
-    padding: 0.6rem 1.3rem; font-size: 0.85rem;
-  }
+  .card-actions { display: flex; gap: 0.8rem; margin-top: 1.5rem; flex-wrap: wrap; }
+  .card-actions .btn { padding: 0.6rem 1.3rem; font-size: 0.85rem; }
   
   /* ---------- CONTACT ---------- */
   .contact {
@@ -325,17 +380,13 @@
   }
   .contact p { color: var(--muted); margin-bottom: 2rem; font-size: 1.1rem; }
   .contact-email {
-    display: inline-block;
-    padding: 1rem 2rem;
+    display: inline-block; padding: 1rem 2rem;
     background: rgba(18, 18, 42, 0.6);
     border: 1px solid rgba(124, 92, 255, 0.3);
     border-radius: 50px;
-    color: var(--accent-2);
-    font-weight: 600;
-    text-decoration: none;
-    margin-bottom: 2rem;
-    transition: all 0.3s;
-    font-size: 1.05rem;
+    color: var(--accent-2); font-weight: 600;
+    text-decoration: none; margin-bottom: 2rem;
+    transition: all 0.3s; font-size: 1.05rem;
   }
   .contact-email:hover {
     background: rgba(124, 92, 255, 0.15);
@@ -351,8 +402,7 @@
     border: 1px solid rgba(124, 92, 255, 0.3);
     border-radius: 50%;
     color: var(--text); text-decoration: none;
-    transition: all 0.3s;
-    font-weight: 600;
+    transition: all 0.3s; font-weight: 600;
   }
   .socials a:hover {
     background: linear-gradient(135deg, var(--accent), var(--accent-2));
@@ -364,10 +414,11 @@
     text-align: center; padding: 2rem;
     color: var(--muted); font-size: 0.9rem;
     border-top: 1px solid rgba(124, 92, 255, 0.15);
+    position: relative; z-index: 1;
   }
   footer span {
     background: linear-gradient(90deg, var(--accent), var(--accent-2));
-    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    background-clip: text; -webkit-background-clip: text; -webkit-text-fill-color: transparent;
     font-weight: 600;
   }
   
@@ -405,6 +456,7 @@
     .scene-stack:hover .card-1 { transform: rotateY(0deg) translateZ(70px); }
     .scene-stack:hover .card-2 { transform: rotateY(120deg) translateZ(70px); }
     .scene-stack:hover .card-3 { transform: rotateY(240deg) translateZ(70px); }
+    .mouse-glow { width: 250px; height: 250px; }
   }
   @media (max-width: 600px) {
     nav { padding: 1rem 1.2rem; }
@@ -414,11 +466,22 @@
     section { padding: 4rem 5vw; }
     .section-title { font-size: 2rem; }
     .btn-outline { margin-left: 0; margin-top: 0.8rem; }
+    .stat-number { font-size: 2.2rem; }
   }
 </style>
 </head>
 <body>
 
+<!-- 1. Animated Gradient Background -->
+<div class="animated-bg"></div>
+
+<!-- 2. Floating Particles -->
+<div class="particles" id="particles"></div>
+
+<!-- 3. Mouse Glow -->
+<div class="mouse-glow" id="mouseGlow"></div>
+
+<!-- Background Orbs -->
 <div class="orb orb-1"></div>
 <div class="orb orb-2"></div>
 <div class="orb orb-3"></div>
@@ -439,14 +502,17 @@
   <div class="hero-text">
     <div class="greeting">Hello, World 👋</div>
     <h1>Muhammad Rehan</h1>
-    <p class="role">Web App Developer & <span>Cybersecurity Enthusiast</span></p>
+    <!-- 4. Typing Animation -->
+    <div class="typing-container">
+      <span class="typing-text" id="typingText"></span><span class="cursor"></span>
+    </div>
     <p>I build modern, secure, and user-friendly web applications — turning ideas into real, working products.</p>
     <a href="#projects" class="btn">View My Work</a>
     <a href="#contact" class="btn btn-outline">Get In Touch</a>
   </div>
   <div class="hero-visual">
     <div class="avatar-ring">
-      <img src="profile.png" alt="Muhammad Rehan" onerror="this.style.display='none'; this.parentElement.innerHTML='‍💻';">
+      <img src="portfolio.png" alt="Muhammad Rehan" onerror="this.style.display='none'; this.parentElement.innerHTML='👨‍💻';">
     </div>
     <div class="scene-stack">
       <div class="card-stack-wrapper">
@@ -454,6 +520,30 @@
         <div class="stack-card card-2">🔒</div>
         <div class="stack-card card-3">🐍</div>
       </div>
+    </div>
+  </div>
+</section>
+
+<!-- 8. Counter Animation Stats -->
+<section class="reveal">
+  <h2 class="section-title">Quick Stats</h2>
+  <p class="section-subtitle">A snapshot of my journey</p>
+  <div class="stats">
+    <div class="stat-item">
+      <span class="stat-number" data-target="2">0</span>
+      <span class="stat-label">Years Learning</span>
+    </div>
+    <div class="stat-item">
+      <span class="stat-number" data-target="10">0</span>
+      <span class="stat-label">Projects Built</span>
+    </div>
+    <div class="stat-item">
+      <span class="stat-number" data-target="5">0</span>
+      <span class="stat-label">Core Skills</span>
+    </div>
+    <div class="stat-item">
+      <span class="stat-number" data-target="100">0</span>
+      <span class="stat-label">% Dedication</span>
     </div>
   </div>
 </section>
@@ -475,9 +565,8 @@
     <div class="skill"><span>🐍 Python</span></div>
     <div class="skill"><span>▲ Next.js</span></div>
     <div class="skill"><span>🔒 Cybersecurity</span></div>
-    <div class="skill"><span>termux</span></div>
+    <div class="skill"><span>📱 Termux</span></div>
     <div class="skill"><span>💻 Tails OS</span></div>
-   
   </div>
 </section>
 
@@ -544,7 +633,71 @@
 </footer>
 
 <script>
-  // Tilt effect on project cards (mouse-driven 3D)
+  // ========== 3. MOUSE GLOW & PARALLAX ==========
+  const mouseGlow = document.getElementById('mouseGlow');
+  document.addEventListener('mousemove', (e) => {
+    mouseGlow.style.left = e.clientX + 'px';
+    mouseGlow.style.top = e.clientY + 'px';
+    
+    const x = (e.clientX / window.innerWidth - 0.5) * 40;
+    const y = (e.clientY / window.innerHeight - 0.5) * 40;
+    document.querySelector('.orb-1').style.transform = `translate(${x}px, ${y}px)`;
+    document.querySelector('.orb-2').style.transform = `translate(${-x}px, ${-y}px)`;
+    document.querySelector('.orb-3').style.transform = `translate(calc(-50% + ${x*0.5}px), calc(-50% + ${y*0.5}px))`;
+  });
+  
+  // ========== 4. TYPING ANIMATION ==========
+  const typingText = document.getElementById('typingText');
+  const phrases = [
+    'Web App Developer',
+    'Cybersecurity Enthusiast',
+    'Next.js Developer',
+    'Python Programmer',
+    'Secure Coding Advocate'
+  ];
+  let phraseIndex = 0;
+  let charIndex = 0;
+  let isDeleting = false;
+  let typingSpeed = 100;
+  
+  function typeEffect() {
+    const currentPhrase = phrases[phraseIndex];
+    if (isDeleting) {
+      typingText.textContent = currentPhrase.substring(0, charIndex - 1);
+      charIndex--;
+      typingSpeed = 50;
+    } else {
+      typingText.textContent = currentPhrase.substring(0, charIndex + 1);
+      charIndex++;
+      typingSpeed = 100;
+    }
+    if (!isDeleting && charIndex === currentPhrase.length) {
+      isDeleting = true;
+      typingSpeed = 2000;
+    } else if (isDeleting && charIndex === 0) {
+      isDeleting = false;
+      phraseIndex = (phraseIndex + 1) % phrases.length;
+      typingSpeed = 500;
+    }
+    setTimeout(typeEffect, typingSpeed);
+  }
+  typeEffect();
+  
+  // ========== 2. FLOATING PARTICLES ==========
+  const particlesContainer = document.getElementById('particles');
+  const particleCount = 30;
+  for (let i = 0; i < particleCount; i++) {
+    const particle = document.createElement('div');
+    particle.className = 'particle';
+    particle.style.left = Math.random() * 100 + '%';
+    particle.style.animationDuration = (Math.random() * 15 + 10) + 's';
+    particle.style.animationDelay = Math.random() * 10 + 's';
+    particle.style.width = (Math.random() * 4 + 2) + 'px';
+    particle.style.height = particle.style.width;
+    particlesContainer.appendChild(particle);
+  }
+  
+  // ========== 5. TILT CARDS ==========
   document.querySelectorAll('.card').forEach(card => {
     card.addEventListener('mousemove', e => {
       const rect = card.getBoundingClientRect();
@@ -561,16 +714,39 @@
     });
   });
   
-  // Parallax on floating orbs
-  window.addEventListener('mousemove', e => {
-    const x = (e.clientX / window.innerWidth - 0.5) * 40;
-    const y = (e.clientY / window.innerHeight - 0.5) * 40;
-    document.querySelector('.orb-1').style.transform = `translate(${x}px, ${y}px)`;
-    document.querySelector('.orb-2').style.transform = `translate(${-x}px, ${-y}px)`;
-    document.querySelector('.orb-3').style.transform = `translate(calc(-50% + ${x*0.5}px), calc(-50% + ${y*0.5}px))`;
-  });
+  // ========== 8. COUNTER ANIMATION ==========
+  const statNumbers = document.querySelectorAll('.stat-number');
+  let countersStarted = false;
   
-  // Scroll reveal animation
+  function animateCounter(el) {
+    const target = parseInt(el.getAttribute('data-target'));
+    const duration = 2000;
+    const step = target / (duration / 16);
+    let current = 0;
+    const timer = setInterval(() => {
+      current += step;
+      if (current >= target) {
+        el.textContent = target + (target === 100 ? '%' : '+');
+        clearInterval(timer);
+      } else {
+        el.textContent = Math.floor(current);
+      }
+    }, 16);
+  }
+  
+  const statsObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting && !countersStarted) {
+        countersStarted = true;
+        statNumbers.forEach(num => animateCounter(num));
+      }
+    });
+  }, { threshold: 0.3 });
+  
+  const statsSection = document.querySelector('.stats');
+  if (statsSection) statsObserver.observe(statsSection);
+  
+  // ========== SCROLL REVEAL ==========
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
@@ -581,7 +757,7 @@
   
   document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
   
-  // Active nav link on scroll
+  // ========== ACTIVE NAV LINK ==========
   const sections = document.querySelectorAll('section[id]');
   const navLinks = document.querySelectorAll('nav a');
   window.addEventListener('scroll', () => {
