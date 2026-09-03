@@ -5,29 +5,30 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0" />
 <title>Muhammad Rehan | Web App Developer & Cybersecurity Enthusiast</title>
 
-<!-- 1. SEO & SOCIAL SHARING METADATA (Audit Fix #2) -->
+<!-- 1. SEO & SOCIAL SHARING (Fixed: Uses relative paths to auto-detect your real domain) -->
 <meta name="description" content="Muhammad Rehan is a Web App Developer and Cybersecurity Enthusiast specializing in Next.js, Python, and secure coding practices. View my featured projects and get in touch." />
-<meta name="keywords" content="Muhammad Rehan, Web Developer, Cybersecurity, Next.js, Python, Portfolio, Secure Coding, Termux" />
+<meta name="keywords" content="Muhammad Rehan, Web Developer, Cybersecurity, Next.js, Python, Portfolio, Secure Coding" />
 <meta name="author" content="Muhammad Rehan" />
-<link rel="canonical" href="https://yourdomain.com/" />
+<link rel="canonical" href="/" />
 
 <!-- Open Graph / Facebook / LinkedIn -->
 <meta property="og:type" content="website" />
-<meta property="og:url" content="https://yourdomain.com/" />
+<meta property="og:url" content="/" />
 <meta property="og:title" content="Muhammad Rehan | Web App Developer & Cybersecurity Enthusiast" />
 <meta property="og:description" content="Building modern, secure, and user-friendly web applications. View my featured projects and get in touch." />
-<meta property="og:image" content="https://yourdomain.com/og-image.png" />
+<!-- Fixed: Using a reliable placeholder that will NEVER 404. Replace this URL with your actual image URL later. -->
+<meta property="og:image" content="https://placehold.co/1200x630/7c5cff/ffffff?text=Muhammad+Rehan+Portfolio" />
 
 <!-- Twitter -->
 <meta property="twitter:card" content="summary_large_image" />
-<meta property="twitter:url" content="https://yourdomain.com/" />
+<meta property="twitter:url" content="/" />
 <meta property="twitter:title" content="Muhammad Rehan | Web App Developer" />
 <meta property="twitter:description" content="Building modern, secure, and user-friendly web applications." />
-<meta property="twitter:image" content="https://yourdomain.com/og-image.png" />
+<meta property="twitter:image" content="https://placehold.co/1200x630/7c5cff/ffffff?text=Muhammad+Rehan+Portfolio" />
 
-<!-- 2. FAVICON (Audit Fix #3) -->
-<link rel="icon" type="image/png" sizes="32x32" href="favicon.png" />
-<link rel="apple-touch-icon" href="favicon.png" />
+<!-- 2. FAVICON (Fixed: Inline SVG, ZERO 404 requests, no file upload needed) -->
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%237c5cff'/><text x='50' y='68' font-family='system-ui, sans-serif' font-size='50' font-weight='bold' fill='white' text-anchor='middle'>MR</text></svg>" />
+<link rel="apple-touch-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%237c5cff'/><text x='50' y='68' font-family='system-ui, sans-serif' font-size='50' font-weight='bold' fill='white' text-anchor='middle'>MR</text></svg>" />
 
 <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-25EVGVLFFL"></script>
@@ -60,29 +61,30 @@
     font-family: 'Poppins', 'Segoe UI', sans-serif;
     background: var(--bg);
     color: var(--text);
-    overflow-x: hidden; /* Prevents horizontal scroll on mobile */
+    overflow-x: hidden;
     line-height: 1.6;
     position: relative;
   }
 
-  /* 3. PROGRESSIVE ENHANCEMENT & ACCESSIBILITY (Audit Fix #1) */
-  /* Default: Visible (for no-JS, crawlers, and print) */
-  .reveal { opacity: 1; transform: translateY(0); }
+  /* 3. BLACK SCREEN FIX: Progressive Enhancement Architecture */
+  /* DEFAULT: 100% Visible. Ensures crawlers, no-JS, and print see everything immediately. */
+  .reveal { 
+    opacity: 1 !important; 
+    transform: translateY(0) !important; 
+  }
   
-  /* Only apply hidden state if JS is enabled AND user doesn't prefer reduced motion */
-  @media (prefers-reduced-motion: no-preference) {
-    .reveal-animate {
-      opacity: 0;
-      transform: translateY(40px);
-      transition: opacity 0.8s ease, transform 0.8s ease;
-    }
-    .reveal-animate.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
+  /* ANIMATION: Only applies if JS successfully loads and adds 'js-ready' to <html> */
+  html.js-ready .reveal-animate {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+  }
+  html.js-ready .reveal-animate.visible {
+    opacity: 1;
+    transform: translateY(0);
   }
 
-  /* PRINT STYLES (Audit Fix #1) */
+  /* PRINT STYLES */
   @media print {
     .reveal, .reveal-animate { opacity: 1 !important; transform: none !important; display: block !important; }
     .mouse-glow, .particles, .orb, .scene-stack, nav, .btn-outline, .socials, .cookie-banner { display: none !important; }
@@ -135,7 +137,7 @@
     z-index: 0; transition: opacity 0.3s; mix-blend-mode: screen;
   }
   
-  /* NAVIGATION & HAMBURGER (Audit Fix #5) */
+  /* NAVIGATION & HAMBURGER */
   nav {
     position: fixed; top: 0; left: 0; right: 0;
     padding: 1.2rem 3rem;
@@ -333,7 +335,7 @@
   }
   .about-content strong { color: var(--accent-2); }
   
-  /* SKILLS (Expanded per Audit Fix #6) */
+  /* SKILLS */
   .skills {
     display: flex; flex-wrap: wrap; gap: 1rem; justify-content: center;
     max-width: 900px; margin: 0 auto;
@@ -415,7 +417,7 @@
   .card-actions { display: flex; gap: 0.8rem; margin-top: 1.5rem; flex-wrap: wrap; }
   .card-actions .btn { padding: 0.6rem 1.3rem; font-size: 0.85rem; }
   
-  /* CONTACT (Enhanced per Audit Fix #6) */
+  /* CONTACT */
   .contact { text-align: center; background: linear-gradient(180deg, transparent, rgba(124, 92, 255, 0.05)); }
   .contact p { color: var(--muted); margin-bottom: 2rem; font-size: 1.1rem; }
   .contact-info {
@@ -477,7 +479,7 @@
   .orb-2 { width: 400px; height: 400px; background: var(--accent-2); bottom: -150px; right: -150px; }
   .orb-3 { width: 300px; height: 300px; background: #ff5ccd; top: 50%; left: 50%; transform: translate(-50%, -50%); opacity: 0.15; }
   
-  /* COOKIE CONSENT BANNER (Audit Fix #6) */
+  /* COOKIE CONSENT BANNER */
   .cookie-banner {
     position: fixed; bottom: 0; left: 0; right: 0;
     background: rgba(18, 18, 42, 0.95);
@@ -495,7 +497,7 @@
     color: var(--accent-2); font-weight: 600; cursor: pointer; text-decoration: underline;
   }
   
-  /* RESPONSIVE & HAMBURGER MENU (Audit Fix #5) */
+  /* RESPONSIVE & HAMBURGER MENU */
   @media (max-width: 900px) {
     .hero { flex-direction: column-reverse; text-align: center; padding-top: 8rem; }
     .hero-visual { margin-top: 1rem; }
@@ -540,13 +542,10 @@
 
 <!-- Animated Gradient Background -->
 <div class="animated-bg"></div>
-
 <!-- Floating Particles -->
 <div class="particles" id="particles"></div>
-
 <!-- Mouse Glow -->
 <div class="mouse-glow" id="mouseGlow"></div>
-
 <!-- Background Orbs -->
 <div class="orb orb-1"></div>
 <div class="orb orb-2"></div>
@@ -566,14 +565,13 @@
   </ul>
 </nav>
 
-<!-- MAIN CONTENT LANDMARK (Audit Fix #6) -->
+<!-- MAIN CONTENT -->
 <main>
   <!-- HERO -->
-  <section class="hero" id="home">
+  <section class="hero reveal" id="home">
     <div class="hero-text">
       <div class="greeting">Hello, World 👋</div>
       <h1>Muhammad Rehan</h1>
-      <!-- Typing Animation -->
       <div class="typing-container">
         <span class="typing-text" id="typingText"></span><span class="cursor"></span>
       </div>
@@ -583,20 +581,19 @@
     </div>
     <div class="hero-visual">
       <div class="avatar-ring">
-        <!-- 4. Image Optimization: Explicit width/height to prevent CLS -->
-        <img src="portfolio.png" alt="Muhammad Rehan" width="300" height="300" onerror="this.style.display='none'; this.parentElement.innerHTML='👨💻';">
+        <img src="profile.png" alt="Muhammad Rehan" width="300" height="300" loading="eager" onerror="this.style.display='none'; this.parentElement.innerHTML='👨‍💻';">
       </div>
       <div class="scene-stack">
         <div class="card-stack-wrapper">
           <div class="stack-card card-1">💻</div>
-          <div class="stack-card card-2"></div>
+          <div class="stack-card card-2">🔒</div>
           <div class="stack-card card-3">🐍</div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Counter Animation Stats (Audit Fix #6: Accurate numbers, no pluralization glitch) -->
+  <!-- STATS -->
   <section class="reveal" id="stats">
     <h2 class="section-title">Quick Stats</h2>
     <p class="section-subtitle">A snapshot of my journey</p>
@@ -629,19 +626,19 @@
     </div>
   </section>
 
-  <!-- SKILLS (Audit Fix #6: Expanded to match "Web App Developer" positioning) -->
+  <!-- SKILLS -->
   <section id="skills" class="reveal">
     <h2 class="section-title">Skills & Tools</h2>
     <p class="section-subtitle">Technologies I work with</p>
     <div class="skills">
       <div class="skill"><span>🌐 HTML5</span></div>
-      <div class="skill"><span> CSS3</span></div>
+      <div class="skill"><span>🎨 CSS3</span></div>
       <div class="skill"><span>⚡ JavaScript</span></div>
       <div class="skill"><span>🐍 Python</span></div>
       <div class="skill"><span>▲ Next.js</span></div>
       <div class="skill"><span>🔒 Cybersecurity</span></div>
       <div class="skill"><span>📦 Git & GitHub</span></div>
-      <div class="skill"><span> Tails OS</span></div>
+      <div class="skill"><span>💻 Tails OS</span></div>
     </div>
   </section>
 
@@ -650,10 +647,8 @@
     <h2 class="section-title">Featured Projects</h2>
     <p class="section-subtitle">Some things I've built recently</p>
     <div class="projects-grid">
-
       <div class="card">
         <div class="card-img">
-          <!-- 4. Image Optimization: lazy loading, async decoding, explicit dimensions -->
           <img src="chicken-shop.png" alt="Chicken Shop Management" width="320" height="200" loading="lazy" decoding="async" onerror="this.style.display='none'; this.parentElement.innerHTML='<div class=placeholder>🐔</div>';">
         </div>
         <div class="card-body">
@@ -673,7 +668,7 @@
 
       <div class="card">
         <div class="card-img">
-          <img src="classtrack-dashboard.png" alt="ClassTrack Dashboard" width="320" height="200" loading="lazy" decoding="async" onerror="this.style.display='none'; this.parentElement.innerHTML='<div class=placeholder></div>';">
+          <img src="classtrack-dashboard.png" alt="ClassTrack Dashboard" width="320" height="200" loading="lazy" decoding="async" onerror="this.style.display='none'; this.parentElement.innerHTML='<div class=placeholder>🎓</div>';">
         </div>
         <div class="card-body">
           <h3>ClassTrack Dashboard</h3>
@@ -689,11 +684,10 @@
           </div>
         </div>
       </div>
-
     </div>
   </section>
 
-  <!-- CONTACT (Audit Fix #6: Added Location) -->
+  <!-- CONTACT -->
   <section id="contact" class="contact reveal">
     <h2 class="section-title">Let's Connect</h2>
     <p class="section-subtitle">Have a project in mind? I'd love to hear about it.</p>
@@ -714,15 +708,17 @@
   © 2026 <span>Muhammad Rehan</span> — Built with ❤️ and a lot of CSS transforms
 </footer>
 
-<!-- Cookie Consent Banner (Audit Fix #6) -->
+<!-- Cookie Consent Banner -->
 <div class="cookie-banner" id="cookieBanner">
   <p>We use cookies to analyze traffic and improve your experience.</p>
   <a onclick="acceptCookies()">Accept</a>
 </div>
 
 <script>
-  // 1. PROGRESSIVE ENHANCEMENT: Add animation class only if JS is running
-  // This ensures crawlers and no-JS users see content immediately (Audit Fix #1)
+  // 1. BLACK SCREEN FIX: Immediately mark JS as ready
+  document.documentElement.classList.add('js-ready');
+
+  // 2. Apply animation classes ONLY after JS is confirmed running
   document.querySelectorAll('.reveal').forEach(el => {
     el.classList.add('reveal-animate');
   });
@@ -783,7 +779,7 @@
     card.addEventListener('mouseleave', () => { card.style.transform = ''; });
   });
   
-  // COUNTER ANIMATION (Audit Fix #6: Uses '+' suffix to avoid "1 Years" pluralization glitch)
+  // COUNTER ANIMATION
   const statNumbers = document.querySelectorAll('.stat-number');
   let countersStarted = false;
   function animateCounter(el) {
@@ -811,10 +807,16 @@
   const statsSection = document.getElementById('stats');
   if (statsSection) statsObserver.observe(statsSection);
   
-  // SCROLL REVEAL
+  // SCROLL REVEAL (Robust: unobserves after triggering to save performance)
   const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('visible'); });
-  }, { threshold: 0.15 });
+    entries.forEach(entry => { 
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1 });
+  
   document.querySelectorAll('.reveal-animate').forEach(el => observer.observe(el));
   
   // ACTIVE NAV LINK
@@ -829,7 +831,7 @@
     });
   });
 
-  // HAMBURGER MENU TOGGLE (Audit Fix #5)
+  // HAMBURGER MENU TOGGLE
   const menuToggle = document.getElementById('menuToggle');
   const navLinksContainer = document.getElementById('navLinks');
   menuToggle.addEventListener('click', () => {
@@ -840,7 +842,6 @@
       : '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="24" height="24"><path d="M4 6h16M4 12h16M4 18h16"/></svg>';
   });
   
-  // Close mobile menu when a link is clicked
   navLinksContainer.querySelectorAll('a').forEach(link => {
     link.addEventListener('click', () => {
       navLinksContainer.classList.remove('active');
@@ -848,7 +849,7 @@
     });
   });
 
-  // COOKIE CONSENT LOGIC (Audit Fix #6)
+  // COOKIE CONSENT LOGIC
   function acceptCookies() {
     localStorage.setItem('cookieConsent', 'true');
     document.getElementById('cookieBanner').classList.remove('show');
